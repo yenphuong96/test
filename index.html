@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YP — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --muted:#94a3b8;
+      color-scheme: dark;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; font-family: 'Poppins', sans-serif; background:var(--bg); color:#e6eef6; overflow-x:hidden; scroll-behavior:smooth; }
+    a { text-decoration:none; color:inherit; }
+
+    /* -------------------- Home Section -------------------- */
+    .home_section {
+      position: relative;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;   /* nội dung xuống cuối màn hình */
+      align-items:center;
+      text-align:left;
+      background: url('/yp1.jpg') center center / cover no-repeat;
+      padding-bottom:0vh;         /* khoảng cách từ đáy */
+    }
+
+    .home_section::before {
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0; bottom:0;
+      
+      z-index:0;
+    }
+    .home_section > * { position: relative; z-index:1; }
+
+    .hero_text {
+      font-family: 'Anton', sans-serif;
+      font-size:9.5vw;
+      line-height:1.5;
+      text-transform:uppercase;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      margin-bottom:26px;
+      white-space: nowrap;       /* chữ không xuống dòng */
+    }
+
+    .nav_contact_link {
+      display:inline-block;
+      padding:0.75ch 1.5vw;
+      border: 1px solid white;
+      border-radius:20px;
+      cursor:pointer;
+      transition:0.3s ease;
+      font-weight:500;
+      color:#fff;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-bottom:8vh;
+    }
+    .nav_contact_link:hover {
+      background:white;
+      color:black;
+    }
+
+    /* -------------------- About Section -------------------- */
+    .about_section { 
+      margin-top:3vh; 
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      text-align:center; 
+      padding: 40px 20px;
+    }
+    .about_section img { width:50vw; border-radius:12px; margin-bottom:16px; opacity:0.85; transition:0.3s ease; }
+    .about_section img:hover { opacity:1; }
+    .about_span { font-weight:700; font-size:2vw; margin-bottom:1vh; display:block; }
+    .about_content { margin-bottom:16px; width:50vw; }
+    .about_text { color:var(--muted); line-height:1.6; margin-bottom:12px; }
+    .about_section .skills { display:flex; flex-wrap:wrap; gap:1vw; justify-content:center; }
+    .about_section .skills span { background: rgba(255,255,255,0.1); padding:0.5vh 1vw; border-radius:50px; font-size:0.9vw; }
+
+    /* -------------------- Hero Cards -------------------- */
+    .hero { display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:start; margin:40px auto; max-width:1200px; }
+    .card { background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent); padding:28px; border-radius:12px; box-shadow:0 6px 18px rgba(2,6,23,0.6); }
+    h1 { margin:0 0 12px; font-size:32px; }
+    h2 { margin:0 0 12px; font-size:28px; }
+    p.lead { margin:0 0 18px; color:var(--muted); }
+    .skills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+    .skill { background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:999px; font-size:13px; color:var(--muted); }
+    .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:12px; }
+    .proj { padding:12px; border-radius:10px; background:rgba(255,255,255,0.02); }
+    .avatar { width:200px; height:200px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 16px auto; box-shadow:0 4px 12px rgba(0,0,0,0.5); }
+
+    /* -------------------- Achievements -------------------- */
+    .achievements_grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 3 cột max, co giãn */
+      gap: 14px;
+      width: 100%;        /* full width trong card */
+      justify-items: center; /* căn giữa mỗi item trong cột */
+    }
+    .achievement_item {
+      text-align: center;
+      width: 100%; /* chiếm toàn bộ cột */
+    }
+    .achievement_img {
+      width: 100%;        /* ảnh vừa khung cột */
+      max-width: 360px;   /* giới hạn tối đa, tuỳ bạn */
+      height: 490px;      /* cao cố định */
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .achievement_caption {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    /* Responsive */
+    @media(max-width:768px){
+      .achievement_img {
+        height: 200px;
+      }
+    }
+    /* -------------------- Experience -------------------- */
+    .experience_grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .experience_item { background: rgba(255, 255, 255, 0.02); padding: 16px; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .experience_item:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(2, 6, 23,0.6); }
+    .experience_item h3 { font-size: 1rem; margin-bottom: 4px; font-weight: 500; }
+    .experience_item .position { font-size:0.9rem; color: var(--accent); margin-bottom: 8px; font-weight:500; }
+    .experience_item .desc { font-size:0.85rem; color: var(--muted); line-height:1.5; }
+
+    footer { margin-top:36px; color:var(--muted); font-size:13px; text-align:center; padding:20px 0; }
+
+    /* -------------------- Responsive -------------------- */
+    @media(max-width:1200px){
+      .about_section img, .about_content { width:70vw; }
+      .hero_text { font-size:10vw; }
+      .hero { grid-template-columns:1fr 300px; }
+    }
+    @media(max-width:768px){
+      .hero_text { font-size:12vw; }
+      .about_section img, .about_content { width:90vw; }
+      .hero { grid-template-columns:1fr; gap:20px; }
+      .achievements_grid, .experience_grid { grid-template-columns:1fr; } 
+      .achievement_img { height:auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Home Section -->
+  <div class="home_section">
+    <div class="hero_text">HELLO,<br>I'm Yen Phuong</div>
+    <a href="#about" class="nav_contact_link">Scroll to Explore</a>
+  </div>
+
+  <!-- About Section -->
+  <div class="about_section" id="about">
+    <div class="about_content">
+      <div class="about_text">
+        Driven undergraduate Senior Anti-fraud Officer seeking opportunities to apply my skills and passion for building innovative solutions.
+      </div>
+    </div>
+    <div class="skills">
+      <span>SQL</span>
+      <span>Python</span>
+      <span>Webflow</span>
+      <span>Framer</span>
+      <span>Wordpress</span>
+      <span>Gsap</span>
+      <span>ReactJS</span>
+      <span>NodeJS</span>
+      <span>NextJS</span>
+    </div>
+  </div>
+
+  <!-- Hero Cards -->
+  <section class="hero">
+    <div>
+      <div class="card">
+        <h1>Yen Phuong <br> Senior Anti-fraud Officer</h1>
+        <p class="lead">Data Analyst | Fraud Investigation | Python, SQL, Web Scraping</p>
+        <div class="skills">
+          <span class="skill">Python</span>
+          <span class="skill">SQL</span>
+          <span class="skill">Selenium</span>
+          <span class="skill">Data Viz</span>
+          <span class="skill">Investigation</span>
+        </div>
+        <div class="projects">
+          <article class="proj">
+            <h3>Case Dashboard</h3>
+            <p class="lead">Dashboard to prioritise suspicious cases using score rules.</p>
+          </article>
+          <article class="proj">
+            <h3>Web Scraper</h3>
+            <p class="lead">Selenium-based scraper for collection of KYC documents.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+    <aside>
+      <div class="card">
+        <img src="/yp2.jpg" alt="Yen Phuong" class="avatar" />
+        <h3>Contact</h3>
+        <p class="lead">Email: your.name@example.com</p>
+        <p><a href="#" style="color:var(--accent)">Download CV</a></p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="about_section">
+    <div class="card" style="width:90%; max-width:1200px;">
+      <h2>Experience</h2>
+      <p class="lead">Over 5 years in fraud investigation, specializing in consumer finance fraud detection, case analysis, and prevention strategy development.</p>
+      <div class="experience_grid">
+        <article class="experience_item">
+          <h3>MB Shinsei Consumer Credit Finance Limited Liability Company (Mcredit)</h3>
+          <p class="position">Senior Anti-Fraud Officer | 5.2021–1.2026</p>
+          <p class="desc">Led multiple fraud detection projects, reduced financial losses by 30%, implemented monitoring systems.</p>
+        </article>
+        <article class="experience_item">
+          <h3>Mirae Asset Finance Company Vietnam</h3>
+          <p class="position">Fraud Prevention Officer | 7.2020–4.2021</p>
+          <p class="desc">Developed rules to detect suspicious transactions, conducted case investigations, and trained junior analysts.</p>
+        </article>
+        <article class="experience_item">
+          <h3>Dai Phat Food CO., LTD.</h3>
+          <p class="position">Human Resources Officer | 8.2019–4.2020</p>
+          <p class="desc">Assisted senior investigators, collected KYC data, and prepared reports for fraud cases.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="about_section">
+    <div class="card" style="width:90%; max-width:1200px;">
+      <h2>Achievements</h2>
+      <p class="lead">
+        Successfully led multiple fraud investigation projects, reducing financial losses by 30%.  
+        Awarded as “Outstanding Investigator of the Year 2023”.  
+        Contributed to developing fraud detection models adopted company-wide.
+      </p>
+      <div class="achievements_grid">
+        <div class="achievement_item">
+          <img src="/cn3.jpg" alt="Achievement 2025" class="achievement_img">
+          <p class="achievement_caption">2025</p>
+        </div>
+        <div class="achievement_item">
+          <img src="/cn2.jpg" alt="Achievement 2023" class="achievement_img">
+          <p class="achievement_caption">2023</p>
+        </div>
+        <div class="achievement_item">
+          <img src="/cn1.jpg" alt="Achievement 2022" class="achievement_img">
+          <p class="achievement_caption">2022</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Yen Phuong — Built with HTML & CSS
+  </footer>
+
+</body>
+</html>
